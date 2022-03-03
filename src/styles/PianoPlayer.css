@@ -1,0 +1,48 @@
+/* .hitzone-position {
+    height: 90%;
+    left: 12.5%;
+    bottom: -2%;
+} */
+
+.hitzone {
+    background-color: white;
+    border-radius: 9999px;
+}
+
+.hitzone:before {
+    content: " ";
+    position: absolute;
+    top: -7%;
+    left: -7%;
+    right: -7%;
+    bottom: -7%;
+    border: 5px solid teal;
+    border-radius: 9999px;
+}
+
+.hitzone-layout {
+    /* width: 115px;
+    height: 50px;
+    left: 6px;
+    bottom: 50px; */
+    bottom: 10%;
+    height: 16%;
+}
+
+.hitzone-width {
+    flex-grow: 1;
+    width: 0;
+}
+
+.max-w-1300 {
+    max-width: 1300px;
+}
+
+.quarter-note {
+    margin-left: 10px;
+}
+
+/* .test {
+    background-image: url(./../assets/staff.svg);
+    background-size: auto 100%;
+} */

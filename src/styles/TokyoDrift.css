@@ -1,0 +1,154 @@
+@-webkit-keyframes RainbowAnimation {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+@-moz-keyframes RainbowAnimation {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+@keyframes RainbowAnimation {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+.bg-rainbow {
+  background: linear-gradient(180deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 154, 0, 1) 10%,
+      rgba(208, 222, 33, 1) 20%,
+      rgba(79, 220, 74, 1) 30%,
+      rgba(63, 218, 216, 1) 40%,
+      rgba(47, 201, 226, 1) 50%,
+      rgba(28, 127, 238, 1) 60%,
+      rgba(95, 21, 242, 1) 70%,
+      rgba(186, 12, 248, 1) 80%,
+      rgba(251, 7, 217, 1) 90%,
+      rgba(255, 0, 0, 1) 100%);
+  -webkit-animation: RainbowAnimation 15s ease infinite;
+  -moz-animation: RainbowAnimation 15s ease infinite;
+  animation: RainbowAnimation 15s ease infinite;
+  background-size: 600% 600%;
+  mask: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 80%);
+}
+
+.mask-right {
+  mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 99%);
+  background-color: black;
+}
+
+.mask-left {
+  mask: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 99%);
+  background-color: black;
+}
+
+@-webkit-keyframes STAR-MOVE {
+	from {
+		background-position: 5% 5%
+	}
+	to { 
+		background-position: 0% 1000%
+	}
+}
+
+@-moz-keyframes STAR-MOVE {
+	from {
+		background-position: 5% 5%
+	}
+	to { 
+		background-position: 0% 1005%
+	}
+}
+
+@keyframes STAR-MOVE {
+	from {
+		background-position: 5% 5%
+	}
+	to { 
+		background-position: 0% 1000%
+	}
+}
+
+.background {
+  background: black url(../assets/background.png) repeat 5% 5%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 200s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: STAR-MOVE;
+  animation-duration: 200s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.midground {
+  background: url(../assets/midground.png) repeat 20% 20%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 150s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: STAR-MOVE;
+  animation-duration: 150s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.foreground {
+  background: url(../assets/foreground.png) repeat 35% 35%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 100s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-name: STAR-MOVE;
+  animation-duration: 100s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

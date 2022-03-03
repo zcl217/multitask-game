@@ -1,0 +1,85 @@
+.menu-background {
+  background: linear-gradient(312deg, #12c9ed, #00a9ff);
+  background-size: 600% 600%;
+
+  -webkit-animation: AnimationName 70s ease infinite;
+  -moz-animation: AnimationName 70s ease infinite;
+  animation: AnimationName 70s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 13%
+  }
+
+  50% {
+    background-position: 100% 88%
+  }
+
+  100% {
+    background-position: 0% 13%
+  }
+}
+
+.menu-button-size {
+  width: 245px;
+  height: 85px;
+}
+
+
+.menu-button-container {
+  width: 245px;
+  height: 85px;
+  background-color: rgb(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button {
+  width: 235px;
+  height: 75px;
+  background: linear-gradient(315deg, rgba(155, 226, 254, 1) 35%, rgba(103, 209, 251, 1) 100%);
+  z-index: 1;
+}
+
+.menu-button-offset {
+  top: 1px;
+  left: 1px;
+}
+
+.menu-button {
+  clip-path: polygon(0% 20%, 10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%);
+}
+
+.menu-button-container-hover:hover {
+  background-color: rgba(103, 209, 251, 0.5);
+}

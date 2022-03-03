@@ -1,0 +1,13 @@
+.crouching {
+    margin-top: 20%;
+}
+
+.top-obstacle {
+    height: 67%;
+    top: 10%;
+}
+
+.bottom-obstacle {
+    height: 20%;
+    bottom: 10%;
+}
