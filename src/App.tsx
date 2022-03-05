@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import HomeScreen from './containers/HomeScreen';
+import GameScreen from './containers/GameScreen';
 
-function App() {
+
+const App: React.FC = () => {
+
+  const [isInGame, setIsInGame] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-screen h-screen min-w-[800px] min-h-[500px] overflow-x-auto">
+      {isInGame ?
+        <GameScreen
+          hideGameScreen={() => setIsInGame(false)}
+        /> :
+        <HomeScreen
+          onStart={() => setIsInGame(true)}
+        />
+      }
+
     </div>
   );
 }
