@@ -83,8 +83,10 @@ export const MODAL_CONTENT_VARIANT = {
     open: {
         opacity: 1,
         transition: {
-            delay: 0.2,
-            duration: 0.1
+            opacity: {
+                delay: 0.2,
+                duration: 0.1
+            }
         }
     },
     closed: {

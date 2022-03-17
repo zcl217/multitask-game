@@ -68,6 +68,7 @@
   width: 235px;
   height: 75px;
   background: linear-gradient(315deg, rgba(155, 226, 254, 1) 35%, rgba(103, 209, 251, 1) 100%);
+  clip-path: polygon(0% 20%, 10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%);
   z-index: 1;
 }
 
@@ -76,10 +77,39 @@
   left: 1px;
 }
 
-.menu-button {
-  clip-path: polygon(0% 20%, 10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%);
-}
-
 .menu-button-container-hover:hover {
   background-color: rgba(103, 209, 251, 0.5);
 }
+
+.modal-content-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  pointer-events: auto;
+  background: linear-gradient(315deg, rgb(108, 179, 208) 35%, rgb(37, 155, 201) 100%);
+  user-select: none;
+  /* bottom: 2rem;
+  width: 235px;
+  height: 75px; */
+  border-radius: 13px;
+  z-index: 1;
+}
+
+.input-field {
+  width: 50%;
+  padding: 10px 20px;
+  margin: 0 auto;
+
+  border: none;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+
+  text-align: center;
+  letter-spacing: 1px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+}
+
