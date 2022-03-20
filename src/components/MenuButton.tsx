@@ -12,7 +12,8 @@ interface MenuButtonProps {
 const MenuButton: React.FC<MenuButtonProps> = (props) => {
     const { isButtonOpen, handleButtonClick, buttonName, positionFromTop, content } = props;
 
-    const buttonClosedStyles = `top-[${positionFromTop}] fixed top-cursor-pointer menu-button-container-hover`;
+    const positionFromTopStyle = 'top-[' + positionFromTop + ']';
+    const buttonClosedStyles = `${positionFromTopStyle} fixed top-cursor-pointer menu-button-container-hover`;
     const handleMenuOpen = () => {
         if (!isButtonOpen) handleButtonClick();
     }
