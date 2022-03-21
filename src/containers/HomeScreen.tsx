@@ -17,9 +17,9 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
     const { loginWithRedirect, logout, user, isAuthenticated, error } = useAuth0();
     const [isLeaderboardOpen, toggleLeaderboardOpen] = useCycle(false, true);
     const [isLoginOpen, toggleLoginOpen] = useCycle(false, true);
-    console.log(isAuthenticated);
-    console.log(user);
-    console.log(error);
+    // console.log(isAuthenticated);
+    // console.log(user);
+    // console.log(error);
 
     return (
         <div className="flex flex-col justify-around w-full h-full text-center menu-background">

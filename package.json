@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "16.x",
     "yarn": "1.x"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@apollo/react-hoc": "^4.0.0",
     "@apollo/react-hooks": "^4.0.0",
     "@auth0/auth0-react": "^1.9.0",
@@ -16,12 +16,12 @@
     "@types/howler": "^2.2.4",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
-    "@types/node": "^16.11.19",
+    "@types/node": "^17.0.21",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "apollo-boost": "^0.4.9",
     "apollo-link-context": "^1.0.20",
-    "framer-motion": "^5.6.0",
+    "framer-motion": "^6.2.8",
     "graphql": "^16.3.0",
     "howler": "^2.2.3",
     "lodash": "^4.17.21",
@@ -58,11 +58,10 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.15"
-  },
-  "resolutions": {
-    "mini-css-extract-plugin": "2.4.5"
+    "autoprefixer": "^10.4.4",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "postcss": "^8.4.12",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^3.0.23"
   }
 }

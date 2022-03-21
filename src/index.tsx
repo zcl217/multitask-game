@@ -10,7 +10,7 @@ const providerConfig = {
   domain: "dev-uvnir9ko.us.auth0.com",
   clientId: "mSuwRiJYiebu6SPseMyiNc2McPCDYbon",
   redirectUri: window.location.origin,
-  // audience: "https://multitask-333.hasura.app/v1/graphql"
+  audience: 'https://multitask333-endpoint.com/api/',
 };
 
 
