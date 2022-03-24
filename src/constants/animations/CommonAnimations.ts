@@ -16,3 +16,13 @@ export const INSTRUCTIONS_ANIMATION = {
         times: [0.24, 0.25, 0.8, 1],
     }
 }
+
+export const getTopAnimation = (value: number) => {
+    return {
+        top: `${value}vh`,
+        transition: {
+            duration: 1,
+            ease: 'easeInOut',
+        }
+    }
+}
