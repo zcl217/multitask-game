@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import HomeScreen from './containers/HomeScreen';
-import GameScreen from './containers/GameScreen';
 import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
+import ScreenContainer from "./containers/ScreenContainer";
 
 const createApolloClient = (authToken: string) => {
   return new ApolloClient({
@@ -26,7 +25,6 @@ const createDefaultClient = () => {
 };
 
 const App: React.FC = () => {
-
   const { user, isAuthenticated } = useAuth0();
   const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
   const [isInGame, setIsInGame] = useState(false);
@@ -46,17 +44,7 @@ const App: React.FC = () => {
 
   return (
     <ApolloProvider client={client}>
-      <div className="w-screen h-screen min-w-[800px] min-h-[500px] overflow-x-auto">
-        {isInGame ?
-          <GameScreen
-            hideGameScreen={() => setIsInGame(false)}
-          /> :
-          <HomeScreen
-            onStart={() => setIsInGame(true)}
-          />
-        }
-
-      </div>
+      <ScreenContainer />
     </ApolloProvider>
   );
 }

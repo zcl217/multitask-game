@@ -3,18 +3,18 @@ import { BUTTON_BORDER_VARIANT, BUTTON_CONTENT_VARIANT, MENU_BUTTON_OPACITY_VARI
 
 interface MenuButtonProps {
     isButtonOpen: boolean,
-    toggleButtonOpen: () => void,
+    handleButtonClick: () => void,
     buttonName: string,
     positionFromTop: string,
-    content: React.ReactNode,
+    content?: React.ReactNode,
 }
 
 const MenuButton: React.FC<MenuButtonProps> = (props) => {
-    const { isButtonOpen, toggleButtonOpen, buttonName, positionFromTop, content } = props;
-
-    const buttonClosedStyles = `top-[${positionFromTop}] fixed top-cursor-pointer menu-button-container-hover`;
+    const { isButtonOpen, handleButtonClick, buttonName, positionFromTop, content } = props;
+    const positionFromTopStyle = 'top-[' + positionFromTop + ']';
+    const buttonClosedStyles = `${positionFromTopStyle} absolute top-cursor-pointer menu-button-container-hover`;
     const handleMenuOpen = () => {
-        if (!isButtonOpen) toggleButtonOpen();
+        if (!isButtonOpen) handleButtonClick();
     }
     /* see if this stops other menu buttons from shifting position */
     return (
@@ -25,8 +25,8 @@ const MenuButton: React.FC<MenuButtonProps> = (props) => {
             animate={isButtonOpen ? "open" : "closed"}
             initial={false}
         >
-            <motion.button
-                className={`menu-button ${isButtonOpen ? 'absolute pointer-events-none' : 'menu-button-offset'}`}
+            <motion.div
+                className={`menu-button ${isButtonOpen ? 'absolute' : 'menu-button-offset cursor-pointer flex items-center justify-center'}`}
                 variants={BUTTON_CONTENT_VARIANT}
                 animate={isButtonOpen ? "open" : "closed"}
                 onClick={() => handleMenuOpen()}
@@ -35,19 +35,20 @@ const MenuButton: React.FC<MenuButtonProps> = (props) => {
                 <div className={`${isButtonOpen ? 'hidden' : 'block'}`}>
                     <span className="pointer-events-none"> {buttonName} </span>
                 </div>
-                {isButtonOpen &&
-                    <motion.div
-                        className="pointer-events-auto"
-                        variants={MODAL_CONTENT_VARIANT}
-                        animate={isButtonOpen ? "open" : "closed"}
-                        onClick={() => toggleButtonOpen()}
-                        initial={false}
-                    >
+                <motion.div
+                    className={`h-full opacity-0 ${isButtonOpen ? '' : 'hidden'}`}
+                    variants={MODAL_CONTENT_VARIANT}
+                    animate={isButtonOpen ? "open" : "closed"}
+                >
+                    <div className="relative flex flex-col h-full">
+                        <button
+                            className="absolute top-[2%] right-[2%] w-16 h-16 modal-content-button"
+                            onClick={() => handleButtonClick()}
+                        > X </button>
                         {content}
-                        <div> close </div>
-                    </motion.div>
-                }
-            </motion.button>
+                    </div>
+                </motion.div>
+            </motion.div>
         </motion.div>
     )
 }
