@@ -1,9 +1,9 @@
 .control-key {
     box-shadow: inset 0px -2px 3px 3px grey;
-    height: 2.5vw;
+    height: max(2vw, 30px);
     min-width: 32px;
 }
 
-.test {
-    font-size: 2vw !important;
+.min-font-size {
+    font-size: max(2vw, 24px);
 }
