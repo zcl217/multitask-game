@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GameOver from "../components/GameOver";
 import PianoPlayer from "../components/games/PianoPlayer";
 import PatternCopier from "../components/games/PatternCopier";
@@ -7,28 +7,59 @@ import TokyoDrift from "../components/games/TokyoDrift";
 import AudioControl from "../components/AudioControl";
 import { HEIGHT_ANIMATION, WIDTH_ANIMATION } from "../constants/animations/GameScreenAnimations";
 import Skateboarder from "../components/games/Skateboarder";
-import Score from "../components/Score";
 
 interface GameScreenProps {
-    hideGameScreen: () => void
+    isInGame: boolean
+    highscore: number
+    hideGameScreen: () => void,
+    shiftGameScreens: () => void,
+    updateHighscore: (newHighscore: number) => void
 }
 
-
 const GameScreen: React.FC<GameScreenProps> = (props) => {
-    const { hideGameScreen } = props;
+    const { isInGame, highscore, hideGameScreen, shiftGameScreens, updateHighscore } = props;
 
     const [gamesDisplayed, setGamesDisplayed] = useState(1);
     const [isAnotherGameOver, setIsAnotherGameOver] = useState(false);
-    const [finalScore, setFinalScore] = useState(0);
+    const [scoreInterval, setScoreInterval] = useState(0);
+    // use state if we decide to always display the score
+    // const [finalScore, setFinalScore] = useState(0);
+    const finalScoreRef = useRef(0);
+
+    useEffect(() => {
+        const interval = window.setInterval(() => finalScoreRef.current++, 1000);
+        setScoreInterval(interval);
+        return () => clearInterval(interval);
+    }, []);
+    useEffect(() => {
+        if (isAnotherGameOver) {
+            clearInterval(scoreInterval);
+            if (finalScoreRef.current > highscore) updateHighscore(finalScoreRef.current);
+        }
+    }, [isAnotherGameOver, scoreInterval]);
 
     const endAllGames = (gameId: number) => {
         setIsAnotherGameOver(true);
     }
-    const handleSetScore = (score: number) => setFinalScore(score);
+    // TODO: we could have a score component to always display the score in game
+    // const handleSetScore = (score: number) => setFinalScore(score);
     return (
-        <div className="flex flex-col w-full h-full select-none">
+        <div className={`flex flex-col w-full h-full select-none ${isInGame ? '' : 'pointer-events-none'}`}>
             <AudioControl isInGame={true} />
             {/* <Score isAnotherGameOver={isAnotherGameOver} handleSetScore={handleSetScore} /> */}
+            {isAnotherGameOver &&
+                <motion.div
+                    className="z-50 opacity-0"
+                    animate={{ opacity: 1, transition: { duration: 3 } }}
+                >
+                    <GameOver
+                        finalScore={finalScoreRef.current}
+                        highscore={highscore}
+                        onRetry={shiftGameScreens}
+                        hideGameScreen={hideGameScreen}
+                    />
+                </motion.div>
+            }
             <motion.div
                 className="flex flex-row justify-between w-full h-full"
                 animate={gamesDisplayed > 2 ? HEIGHT_ANIMATION : ''}
@@ -41,6 +72,7 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                     {/* <Skateboarder
                         endAllGames={endAllGames}
                         isAnotherGameOver={isAnotherGameOver}
+                        isSmallScreen={gamesDisplayed > 2}
                     /> */}
                     {/* <PianoPlayer
                         endAllGames={endAllGames}
@@ -103,10 +135,7 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                     </motion.div>
                 }
             </motion.div>
-
-            {isAnotherGameOver && <GameOver onSubmit={hideGameScreen} />}
         </div >
-
     );
 }
 
