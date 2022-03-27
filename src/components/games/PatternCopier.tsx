@@ -244,9 +244,9 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             } else if (currentPatternIteration % 6 === 0) {
                 levelRef.current++;
             }
-            if (currentPatternIteration === 3 ||
-                currentPatternIteration === 7 ||
-                currentPatternIteration === 11) displayNextGame();
+            if (currentPatternIteration === 2 ||
+                currentPatternIteration === 6 ||
+                currentPatternIteration === 10) displayNextGame();
         }, MOVEMENT_DELAY);
         setTimeout(() => {
             if (isCurrentGameOverRef.current) return;
