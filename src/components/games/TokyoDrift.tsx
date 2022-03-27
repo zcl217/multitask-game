@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, useCallback, useMemo, useRef } from "react";
+import React, { useState, useReducer, useEffect, useMemo, useRef } from "react";
 import { times, uniqueId } from 'lodash';
 import { ReactComponent as Spaceship } from '../../assets/spaceship.svg';
 import { ReactComponent as Meteor } from '../../assets/meteor.svg';
@@ -9,7 +9,6 @@ import { GAME_IDS } from "../../constants/common";
 import { checkIfIntersecting, handleGameOverAudio } from "../../helpers/helpers";
 import { getMeteorAnimationProperties, TOKYO_DRIFT_SMALL_SPRITES_ANIMATION } from "../../constants/animations/TokyoDriftAnimations";
 import Instructions from "../Instructions";
-import useTimeout from "../../hooks/useTimeout";
 
 const INITIAL_METEOR_COUNT = 4;
 const SPACESHIP_MOVEMENT_DELAY = 2;
@@ -244,7 +243,6 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
         } as React.CSSProperties
     };
 
-
     // TODO: fix clipping background animation
     return (
         <div className="relative w-full h-full overflow-y-hidden bg-black tokyo-drift-container">
@@ -281,7 +279,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
             <div className="absolute z-10 flex justify-around w-full h-full" data-type="rainbowLanes" >
                 {rainbowLanes}
             </div>
-            <div className="absolute z-50 flex items-end justify-around w-full h-full" data-type="spaceshipContainer">
+            <div className="absolute z-40 flex items-end justify-around w-full h-full" data-type="spaceshipContainer">
                 {spaceshipContainer.map(element => {
                     return element.type === CONTAINER_ELEMENT_TYPES.SPACESHIP && !shouldStopSpaceship ?
                         <motion.div
@@ -318,10 +316,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
                 </div>
                 }
             </div>
-
-
         </div >
-
     );
 }
 
