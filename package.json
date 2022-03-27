@@ -57,6 +57,9 @@
       "last 1 safari version"
     ]
   },
+  "resolutions": {
+    "mini-css-extract-plugin": "2.4.5"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
     "css-minimizer-webpack-plugin": "^3.4.1",
