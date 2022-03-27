@@ -4,3 +4,5 @@ export const GAME_IDS = {
     PIANO: 2,
     SKATEBOARDER: 3
 }
+
+export const GAME_SCREEN_SHIFT_DURATION = 1;

@@ -1,3 +1,5 @@
+import { GAME_SCREEN_SHIFT_DURATION } from "../common"
+
 export const XMARK_ANIMATION = {
     scale: 2,
     transition: {
@@ -17,12 +19,34 @@ export const INSTRUCTIONS_ANIMATION = {
     }
 }
 
-export const getTopAnimation = (value: number) => {
+export const getVerticalShiftAnimation = (value: number) => {
     return {
         top: `${value}vh`,
         transition: {
-            duration: 1,
+            duration: GAME_SCREEN_SHIFT_DURATION,
             ease: 'easeInOut',
         }
     }
 }
+
+export const HORIZONTAL_DISPLAY_ANIMATION = {
+    left: ['100vw', '0vw', '0vw', '0vw'],
+    opacity: [1, 1, 1, 1],
+    transition: {
+        duration: GAME_SCREEN_SHIFT_DURATION,
+        ease: 'easeInOut',
+        times: [0, 0.98, 0.99, 1]
+    }
+
+}
+
+export const HORIZONTAL_HIDE_ANIMATION = {
+    left: ['0vw', '-100vw', '-100vw', '100vw'],
+    opacity: [1, 1, 0, 0],
+    transition: {
+        duration: GAME_SCREEN_SHIFT_DURATION,
+        ease: 'easeInOut',
+        times: [0, 0.98, 0.99, 1]
+    }
+}
+
