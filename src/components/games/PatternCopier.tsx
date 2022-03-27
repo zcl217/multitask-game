@@ -407,9 +407,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                                             initial={true}
                                             animate={WRONG_CELL_ANIMATION}
                                         /> */}
-                                        {shouldDisplayPlayer &&
-                                            rowIndex === yPos &&
-                                            colIndex === xPos &&
+                                        {rowIndex === yPos && colIndex === xPos &&
                                             <motion.div
                                                 layoutId={playerId}
                                                 transition={PLAYER_TRANSITION}
