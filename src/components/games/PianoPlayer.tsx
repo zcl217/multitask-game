@@ -28,6 +28,7 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
     const [noteAnimationSpeed, setNoteAnimationSpeed] = useState(5);
     const [wrongNoteLanes, setWrongNoteLanes] = useState([] as number[]);
     const [correctlyPlayedNotes] = useState(new Set());
+    const [isMissedNote, setIsMissedNote] = useState(false);
     const [hiddenNotes, setHiddenNotes] = useState([true, true, true]);
     const [shouldDisplayX, setShouldDisplayX] = useState(false);
 
@@ -133,6 +134,7 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
                 if (!correctlyPlayedNotes.has(index)) {
                     isCurrentGameOverRef.current = true;
                     setShouldDisplayX(true);
+                    setIsMissedNote(true);
                     handleCurrentGameEnd();
                     endAllGames(GAME_IDS.PIANO);
                     setWrongNoteLanes(lanes => {
@@ -155,7 +157,7 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
             beginNoteTimeout();
         }, 2000);
         return () => clearTimeout(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleHitzoneCheck = (index: number) => {
@@ -225,7 +227,7 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
                     className="relative flex items-end justify-center w-full h-full overflow-hidden flex-end" data-type="playing-field"
                 >
                     <div className="relative flex w-auto h-full">
-                        <GrandStaff className="w-auto h-full staff" />
+                        <GrandStaff className="w-full h-full staff" />
                         <div className={`
                             absolute z-10 flex items-center justify-center w-full opacity-90 hitzone-layout
                             ${isSmallScreen ? 'left-[6px]' : 'left-[4px]'}
@@ -244,7 +246,10 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
                             </motion.div>
                             {wrongNoteLanes.includes(i) &&
                                 <div className="absolute z-20 flex items-center justify-center w-full h-full mx-auto">
-                                    <XMarkSVG className="w-full h-full" />
+                                    {isMissedNote ?
+                                        <div className="text-red-600"> Missed <br /> Note </div> :
+                                        <div className="text-red-600"> Wrong <br /> Timing </div>
+                                    }
                                 </div>
                             }
                         </div>
