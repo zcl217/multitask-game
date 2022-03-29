@@ -94,7 +94,7 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
         VERTICAL_MOVEMENT_ANIMATION,
         BOTTOM_OBSTACLE_ANIMATION,
         TOP_OBSTACLE_ANIMATION
-    ])
+    ]);
 
     const handleCurrentGameEnd = useCallback(() => {
         isCurrentGameOverRef.current = true;
@@ -127,7 +127,7 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
             }, 50);
         }, 4000);
         return () => clearInterval(collisionCheckerIntervalRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -183,20 +183,20 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
             <div className="top-0 w-full bg-purple-300 h-[10%]">
                 &nbsp;
             </div>
-            <div className="relative z-10 ml-[30%] h-[80%]">
+            <div className="relative z-10 ml-[30%] w-[20%] h-[80%]">
                 <motion.div
                     className="absolute bottom-0 flex flex-col h-1/5"
                     animate={VERTICAL_MOVEMENT_ANIMATION}
                 >
-                    <div className="flex flex-col justify-between h-full" data-type="player-container">
+                    <div className={`flex flex-col ${isCrouching ? 'justify-end' : 'justify-between'} h-full`} data-type="player-container">
                         <motion.div
-                            className={`flex justify-center h-1/2 ${isCrouching ? 'crouching' : ''}`}
+                            className={`flex justify-center h-1/2`}
                             animate={PLAYER_JUMP_ANIMATION}
                         >
                             <img src={Square} alt="Square" className="h-full player" />
                         </motion.div>
                         <motion.div
-                            className="h-[30%]"
+                            className="h-[30%] flex justify-center"
                             animate={SKATEBOARD_JUMP_ANIMATION}
                         >
                             <Skateboard className="h-full skateboard" />
@@ -208,7 +208,6 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
                 &nbsp;
             </div>
         </div>
-
     );
 }
 
