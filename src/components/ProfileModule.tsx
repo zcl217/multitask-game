@@ -64,7 +64,7 @@ const ProfileModule: React.FC<ProfileModuleProps> = (props) => {
     }
     const handleLogout = () => {
         setIsLoggingOut(true);
-        logout();
+        logout({ returnTo: window.location.origin });
     }
 
     return (
