@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { INSTRUCTIONS_ANIMATION } from "../constants/animations/CommonAnimations";
+import { CONTROL_KEYS_ANIMATION, INSTRUCTIONS_ANIMATION } from "../constants/animations/CommonAnimations";
 
 interface InstructionsProps {
     mainText: string,
@@ -16,12 +16,22 @@ const Instructions: React.FC<InstructionsProps> = (props) => {
         for (let a = 0; a < controlKeys.length; a++) {
             if (controlKeyText) {
                 controlList.push(<div className="flex flex-row items-center" key={controlKeys[a]}>
-                    <span className="flex items-center justify-center p-2 pb-3 mx-2 text-black bg-white border-2 border-black rounded-md control-key"> {controlKeys[a]} </span>
+                    <motion.span
+                        className="flex items-center justify-center p-2 pb-3 mx-2 text-black bg-white border-2 border-black rounded-md control-key"
+                        animate={CONTROL_KEYS_ANIMATION}
+                    >
+                        {controlKeys[a]}
+                    </motion.span>
                     <span className=""> {controlKeyText[a]} {a < controlKeys.length - 1 && '|'} </span>
                 </div>);
             } else {
                 controlList.push(<div key={controlKeys[a]}>
-                    <span className="flex items-center justify-center p-2 pb-3 mx-2 text-black bg-white border-2 border-black rounded-md control-key"> {controlKeys[a]} </span>
+                    <motion.span
+                        className="flex items-center justify-center p-2 pb-3 mx-2 text-black bg-white border-2 border-black rounded-md control-key"
+                        animate={CONTROL_KEYS_ANIMATION}
+                    >
+                        {controlKeys[a]}
+                    </motion.span>
                 </div>);
             }
         }

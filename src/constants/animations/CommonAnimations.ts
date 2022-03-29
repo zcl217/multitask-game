@@ -19,6 +19,16 @@ export const INSTRUCTIONS_ANIMATION = {
     }
 }
 
+export const CONTROL_KEYS_ANIMATION = {
+    boxShadow: ['inset 0px -2px 3px 3px grey', 'inset 0px 0px 3px 3px grey'],
+    backgroundColor: ['#ffffff', '#cec8c8'],
+    paddingTop: ['8px', '11px'],
+    transition: {
+        repeat: 8,
+        duration: 1
+    }
+}
+
 export const getVerticalShiftAnimation = (value: number) => {
     return {
         top: `${value}vh`,
