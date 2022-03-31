@@ -144,7 +144,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const gridLengthRef = useRef(grid.length);
     const timerIdRef = useRef(0);
     const canPlayerMoveRef = useRef(false);
-    const currentPatternIterationRef = useRef(1);
+    const currentPatternIterationRef = useRef(0);
     const levelRef = useRef(INITIAL_PATTERN_COUNT);
     const isCurrentGameOverRef = useRef(false);
     const TIMER_ANIMATION = useAnimation();
@@ -206,7 +206,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                     setPatternList(newPatternList);
                     triggerTimer();
                     // we only display the start text once
-                    if (currentPatternIterationRef.current === 1) {
+                    if (currentPatternIterationRef.current === 0) {
                         const startTextDelay = MOVEMENT_DELAY - 1000;
                         setTimeout(() => {
                             setShouldDisplayStartText(true);
