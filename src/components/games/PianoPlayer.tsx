@@ -153,10 +153,10 @@ const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
     };
 
     useEffect(() => {
-        const id = setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             beginNoteTimeout();
         }, 2000);
-        return () => clearTimeout(id);
+        return () => clearTimeout(timeoutId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

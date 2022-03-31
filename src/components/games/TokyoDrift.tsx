@@ -214,7 +214,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
             setMeteorContainer(newLanes);
         }, meteorSpeed);
         setMeteorSpawnerInterval(meteorSpawner);
-        const collisionChecker = setInterval(() => {
+        const collisionChecker = window.setInterval(() => {
             const meteors = document.getElementsByClassName('meteor');
             const spaceshipBoundary = document.getElementsByClassName('spaceship')[0].getBoundingClientRect();
             for (let a = 0; a < meteors.length; a++) {

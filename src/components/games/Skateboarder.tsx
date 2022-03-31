@@ -107,7 +107,7 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
     // on mount, we begin the game and constantly check
     // if the player is intersecting with any obstacles
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             spawnObstacle();
             collisionCheckerIntervalRef.current = window.setInterval(() => {
                 const obstacles = document.getElementsByClassName('obstacle');
@@ -126,7 +126,10 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
                 }
             }, 50);
         }, 4000);
-        return () => clearInterval(collisionCheckerIntervalRef.current);
+        return () => {
+            clearTimeout(timeoutId);
+            clearInterval(collisionCheckerIntervalRef.current);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

@@ -228,9 +228,10 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
 
     }, [grid]);
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutId = window.setTimeout(() => {
             startPattern();
         }, 4000);
+        return () => clearTimeout(timeoutId);
     }, []);
 
     const handleGameOver = useCallback(() => {
