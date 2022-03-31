@@ -61,7 +61,7 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                 </motion.div>
             }
             <motion.div
-                className="flex flex-row justify-between w-full h-full"
+                className="flex flex-row w-full h-full"
                 animate={gamesDisplayed > 2 ? HEIGHT_ANIMATION : ''}
                 data-type="top-game-container"
             >
@@ -104,7 +104,7 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                     </motion.div>}
             </motion.div>
             <motion.div
-                className="flex flex-row justify-between w-full h-0"
+                className="flex flex-row w-full h-0"
                 animate={gamesDisplayed > 2 ? HEIGHT_ANIMATION : ''}
                 data-type="bottom-game-container"
             >
