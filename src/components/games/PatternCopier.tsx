@@ -116,6 +116,8 @@ const generateGrid = () => {
     return grid;
 }
 
+const INITIAL_PATTERN_COUNT = 2;
+
 // TODO: two consecutive press not working bug might've been because of grid length not being able to be accessed
 // in the useKey callback but not completely sure
 // TODO: timer is not clearing properly on another game end... and I can still move?????
@@ -127,7 +129,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const [xPos, setXPos] = useState(0);
     const [yPos, setYPos] = useState(0);
     const [patternList, setPatternList] = useState([] as Pattern[]);
-    const [currentPatternIteration, setCurrentPatternIteration] = useState(1);
+    const [shouldDisplayStartText, setShouldDisplayStartText] = useState(false);
     const [shouldDisplayPlayer, setShouldDisplayPlayer] = useState(false);
     const [isPlayerOnWrongCell, setIsPlayerOnWrongCell] = useState(false);
     const [shouldDisplayX, setShouldDisplayX] = useState(false);
@@ -142,7 +144,8 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const gridLengthRef = useRef(grid.length);
     const timerIdRef = useRef(0);
     const canPlayerMoveRef = useRef(false);
-    const levelRef = useRef(2);
+    const currentPatternIterationRef = useRef(1);
+    const levelRef = useRef(INITIAL_PATTERN_COUNT);
     const isCurrentGameOverRef = useRef(false);
     const TIMER_ANIMATION = useAnimation();
     // we want the most updated state in the useKey callback
@@ -202,6 +205,16 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                 if (a === patternCount) {
                     setPatternList(newPatternList);
                     triggerTimer();
+                    // we only display the start text once
+                    if (currentPatternIterationRef.current === 1) {
+                        const startTextDelay = MOVEMENT_DELAY - 1000;
+                        setTimeout(() => {
+                            setShouldDisplayStartText(true);
+                        }, startTextDelay);
+                        setTimeout(() => {
+                            setShouldDisplayStartText(false);
+                        }, startTextDelay + 1000);
+                    };
                     setTimeout(() => {
                         if (isCurrentGameOverRef.current) return;
                         setShouldDisplayPlayer(true);
@@ -217,7 +230,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     useEffect(() => {
         setTimeout(() => {
             startPattern();
-        }, 2000);
+        }, 4000);
     }, []);
 
     const handleGameOver = useCallback(() => {
@@ -238,15 +251,15 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             setDisplayCheckmark(false);
             setIsPlayerMoving(false);
             setShouldDisplayPlayer(false);
-            setCurrentPatternIteration(x => x + 1);
-            if (currentPatternIteration % 5 === 0) {
+            currentPatternIterationRef.current++;
+            if (currentPatternIterationRef.current % 5 === 0) {
                 gridDispatcher({ type: GRID_ACTION_TYPES.EXPAND_GRID });
-            } else if (currentPatternIteration % 6 === 0) {
+            } else if (currentPatternIterationRef.current % 6 === 0) {
                 levelRef.current++;
             }
-            if (currentPatternIteration === 2 ||
-                currentPatternIteration === 6 ||
-                currentPatternIteration === 10) displayNextGame();
+            if (currentPatternIterationRef.current === 2 ||
+                currentPatternIterationRef.current === 6 ||
+                currentPatternIterationRef.current === 10) displayNextGame();
         }, MOVEMENT_DELAY);
         setTimeout(() => {
             if (isCurrentGameOverRef.current) return;
@@ -345,13 +358,14 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const shouldDisplayTimer = () => {
         if (displayCheckmark) return false;
         const isPlayerTurn = canPlayerMoveRef.current || isPlayerMoving;
+        // on game over, we want the time to stay there
         return isPlayerTurn || (timeRemaining > 0 && isAnotherGameOver);
     };
     return (
         <div className="relative flex items-center justify-center w-full h-full p-8 bg-sky-300">
             {shouldDisplayX && <XMark />}
             <Instructions
-                mainText={"Copy the pattern!"}
+                mainText={"Follow the green pattern!"}
                 controlKeys={['←', '↑', '→', '↓']}
                 isLargeScreen={true}
             />
@@ -378,6 +392,9 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                         animate={TIMER_ANIMATION}
                     > {timeRemaining} </motion.div>}
             </div>
+            {shouldDisplayStartText &&
+                <motion.h1 className="absolute top-10 text-7xl" animate={CHECKMARK_ANIMATION}> Start! </motion.h1>
+            }
             <div className="flex items-center justify-center h-2/3">
                 <div>
                     {
