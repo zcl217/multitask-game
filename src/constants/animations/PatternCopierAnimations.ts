@@ -43,4 +43,5 @@ export const TIMER_ANIMATION_PROPERTIES = {
         damping: 70
     }
 };
-export const PLAYER_TRANSITION = { duration: MOVEMENT_DELAY / 1500, ease: "linear" };
+export const SMOOTH_TRANSITION = { duration: MOVEMENT_DELAY / 1500, ease: "linear" };
+export const INSTANT_TRANSITION = { duration: 0, ease: 'linear' };

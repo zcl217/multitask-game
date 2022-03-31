@@ -3,7 +3,7 @@ import { GAME_IDS } from "../../constants/common";
 import { cloneDeep, uniqueId } from "lodash";
 import { useKey } from 'react-use';
 import { motion, useAnimation } from "framer-motion";
-import { CELL_ANIMATION_PROPERTIES, CELL_ANIMATION_SMALL_PROPERTIES, CELL_CONTAINER_VARIANT, CHECKMARK_ANIMATION, PLAYER_TRANSITION, TIMER_ANIMATION_PROPERTIES, } from "../../constants/animations/PatternCopierAnimations";
+import { CELL_ANIMATION_PROPERTIES, CELL_ANIMATION_SMALL_PROPERTIES, CELL_CONTAINER_VARIANT, CHECKMARK_ANIMATION, INSTANT_TRANSITION, SMOOTH_TRANSITION, TIMER_ANIMATION_PROPERTIES, } from "../../constants/animations/PatternCopierAnimations";
 import { ReactComponent as Checkmark } from '../../assets/checkmark.svg';
 import { handleGameOverAudio } from "../../helpers/helpers";
 import XMark from "../XMark";
@@ -133,6 +133,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const [shouldDisplayPlayer, setShouldDisplayPlayer] = useState(false);
     const [isPlayerOnWrongCell, setIsPlayerOnWrongCell] = useState(false);
     const [shouldDisplayX, setShouldDisplayX] = useState(false);
+    const [isGridExpanding, setIsGridExpanding] = useState(false);
     // initialize a 3 by 3 matrix
     const [grid, gridDispatcher] = useReducer(gridReducer, generateGrid());
     // you can't access state inside a callback, so use a ref
@@ -254,7 +255,9 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             setShouldDisplayPlayer(false);
             currentPatternIterationRef.current++;
             if (currentPatternIterationRef.current % 5 === 0) {
+                setIsGridExpanding(true);
                 gridDispatcher({ type: GRID_ACTION_TYPES.EXPAND_GRID });
+                setTimeout(() => setIsGridExpanding(false), 500);
             } else if (currentPatternIterationRef.current % 6 === 0) {
                 levelRef.current++;
             }
@@ -428,7 +431,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                                         {rowIndex === yPos && colIndex === xPos &&
                                             <motion.div
                                                 layoutId={playerId}
-                                                transition={PLAYER_TRANSITION}
+                                                transition={isGridExpanding ? INSTANT_TRANSITION : SMOOTH_TRANSITION}
                                                 className="absolute z-10 w-4 h-4 bg-lime-300"
                                             />
                                         }
