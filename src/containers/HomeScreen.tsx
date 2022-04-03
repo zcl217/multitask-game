@@ -1,5 +1,4 @@
-import { motion, useCycle } from "framer-motion";
-import AudioControl from "../components/AudioControl";
+import { useCycle } from "framer-motion";
 import Leaderboard from "../components/LeaderBoard";
 import MenuButton from "../components/MenuButton";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -24,7 +23,6 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                 {error?.toString() !== 'Error: Invalid state' && error?.toString()}
             </div>
             <div className="relative top-0 flex flex-col items-center w-full h-full text-3xl" >
-                <AudioControl isInGame={false} />
                 <span className="my-20 font-extrabold text-7xl">
                     Multitask 333
                 </span>

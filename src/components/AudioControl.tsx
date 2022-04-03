@@ -5,30 +5,13 @@ import { useEffect, useState } from 'react';
 import { GAME_BGM, HOME_SCREEN_BGM } from '../audio/sounds';
 
 interface AudioControlProps {
-    isInGame: Boolean
-}
-
-// if we were already playing the BGM on another screen, we want to auto start it
-// otherwise, we leave it muted
-// TODO: have to have a different variable keep track of whether BGM is playing or not cuz
-// game bgm ends on defeat
-const audioStateHandler = () => {
-    const isAudioOn = HOME_SCREEN_BGM.playing() || GAME_BGM.playing();
-    if (isAudioOn) {
-        HOME_SCREEN_BGM.stop();
-        GAME_BGM.stop();
-    }
-    return isAudioOn;
+    isInGame: boolean,
+    isAudioOn: boolean,
+    setIsAudioOn: (state: boolean) => void,
 }
 
 const AudioControl: React.FC<AudioControlProps> = (props) => {
-    const { isInGame } = props;
-    const [isAudioOn, setIsAudioOn] = useState(false);
-
-    useEffect(() => {
-        // doesn't work if we pass in audioStateHandler() into useState directly
-        setIsAudioOn(audioStateHandler());
-    }, []);
+    const { isInGame, isAudioOn, setIsAudioOn } = props;
 
     useEffect(() => {
         if (isAudioOn) {
@@ -49,9 +32,7 @@ const AudioControl: React.FC<AudioControlProps> = (props) => {
                     className="w-10 h-10"
                     onClick={() => setIsAudioOn(true)}
                 />}
-
         </div>
-
     );
 }
 

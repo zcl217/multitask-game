@@ -4,7 +4,6 @@ import PianoPlayer from "../components/games/PianoPlayer";
 import PatternCopier from "../components/games/PatternCopier";
 import { motion } from "framer-motion";
 import TokyoDrift from "../components/games/TokyoDrift";
-import AudioControl from "../components/AudioControl";
 import { HEIGHT_ANIMATION, WIDTH_ANIMATION } from "../constants/animations/GameScreenAnimations";
 import Skateboarder from "../components/games/Skateboarder";
 
@@ -45,7 +44,6 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
     // const handleSetScore = (score: number) => setFinalScore(score);
     return (
         <div className={`flex flex-col w-full h-full select-none ${isInGame ? '' : 'pointer-events-none'}`}>
-            <AudioControl isInGame={true} />
             {/* <Score isAnotherGameOver={isAnotherGameOver} handleSetScore={handleSetScore} /> */}
             {isAnotherGameOver &&
                 <motion.div

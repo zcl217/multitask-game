@@ -8,10 +8,12 @@ import { getVerticalShiftAnimation, HORIZONTAL_DISPLAY_ANIMATION, HORIZONTAL_HID
 import { FETCH_CURRENT_USER, INSERT_NEW_USER_MUTATION, UPDATE_USER_SCORE_MUTATION } from "../queries/queries";
 import { uniqueId } from "lodash";
 import { GAME_SCREEN_SHIFT_DURATION } from "../constants/common";
+import AudioControl from "../components/AudioControl";
 
 const ScreenContainer: React.FC = () => {
     const { user } = useAuth0();
     const [isInGame, setIsInGame] = useState(false);
+    const [isAudioOn, setIsAudioOn] = useState(false);
     const [isGameDisplayed, setIsGameDisplayed] = useState(false);
     // changing the keys will reset the component
     const [firstGameKey, setFirstGameKey] = useState(uniqueId());
@@ -54,12 +56,14 @@ const ScreenContainer: React.FC = () => {
     }
     const hideGameScreen = () => {
         setIsInGame(false);
+        // after the shift animation finishes, we reset both game components
         setTimeout(() => {
             setFirstGameKey(uniqueId());
             setSecondGameKey(uniqueId());
             setIsGameDisplayed(false);
         }, GAME_SCREEN_SHIFT_DURATION * 1000);
     }
+    // reset the incoming game component by assigning a new ky
     const shiftGameScreens = () => {
         isFirstGameScreenHidden ?
             setFirstGameKey(uniqueId()) :
@@ -105,14 +109,21 @@ const ScreenContainer: React.FC = () => {
                         data-type="game-screen-one"
                     >
                         {(!isFirstGameScreenHidden || isGameScreenShifting) &&
-                            <GameScreen
-                                isInGame={isInGame}
-                                highscore={highscore}
-                                hideGameScreen={hideGameScreen}
-                                shiftGameScreens={shiftGameScreens}
-                                updateHighscore={updateHighscore}
-                                key={firstGameKey}
-                            />
+                            <>
+                                <AudioControl
+                                    isInGame={true}
+                                    isAudioOn={isAudioOn}
+                                    setIsAudioOn={setIsAudioOn}
+                                />
+                                <GameScreen
+                                    isInGame={isInGame}
+                                    highscore={highscore}
+                                    hideGameScreen={hideGameScreen}
+                                    shiftGameScreens={shiftGameScreens}
+                                    updateHighscore={updateHighscore}
+                                    key={firstGameKey}
+                                />
+                            </>
                         }
                     </motion.div>
                     <motion.div
@@ -122,14 +133,21 @@ const ScreenContainer: React.FC = () => {
                         data-type="game-screen-two"
                     >
                         {(isFirstGameScreenHidden || isGameScreenShifting) &&
-                            <GameScreen
-                                isInGame={isInGame}
-                                highscore={highscore}
-                                hideGameScreen={hideGameScreen}
-                                shiftGameScreens={shiftGameScreens}
-                                updateHighscore={updateHighscore}
-                                key={secondGameKey}
-                            />
+                            <>
+                                <AudioControl
+                                    isInGame={true}
+                                    isAudioOn={isAudioOn}
+                                    setIsAudioOn={setIsAudioOn}
+                                />
+                                <GameScreen
+                                    isInGame={isInGame}
+                                    highscore={highscore}
+                                    hideGameScreen={hideGameScreen}
+                                    shiftGameScreens={shiftGameScreens}
+                                    updateHighscore={updateHighscore}
+                                    key={secondGameKey}
+                                />
+                            </>
                         }
                     </motion.div>
                 </motion.div>
