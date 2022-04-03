@@ -14,7 +14,7 @@ interface SkateboarderProps {
     isAnotherGameOver: boolean,
     isSmallScreen: boolean
 }
-// TODO: not sure, but game might mess up as it shrinks 
+
 const Skateboarder: React.FC<SkateboarderProps> = (props) => {
     const { endAllGames, isAnotherGameOver, isSmallScreen } = props;
     const [isCrouching, setIsCrouching] = useState(false);
@@ -58,7 +58,7 @@ const Skateboarder: React.FC<SkateboarderProps> = (props) => {
             right: `-${randomWidth}%`,
             height: `${randomHeight}%`
         } as React.CSSProperties);
-    }, []);
+    }, [isSmallScreen]);
     // recursively call spawnObstacle until the game ends
     const spawnObstacle = () => {
         if (isCurrentGameOverRef.current) return;

@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { orderBy } from 'lodash';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { FETCH_HIGHSCORES_QUERY } from '../queries/queries';
 
 interface LeaderboardProps {
@@ -10,7 +10,7 @@ interface LeaderboardProps {
 const Leaderboard: React.FC<LeaderboardProps> = (props) => {
   const { isLeaderboardOpen } = props;
   // TODO: error handling
-  const { loading, error, data, refetch } = useQuery(FETCH_HIGHSCORES_QUERY, {
+  const { loading, data, refetch } = useQuery(FETCH_HIGHSCORES_QUERY, {
     onError: (e) => { console.log(e); },
   });
 
@@ -18,14 +18,13 @@ const Leaderboard: React.FC<LeaderboardProps> = (props) => {
   useEffect(() => {
     if (!isLeaderboardOpen) return;
     refetch();
-  }, [isLeaderboardOpen]);
+  }, [isLeaderboardOpen, refetch]);
 
   const leaderboardUsers = useMemo(() => {
     if (loading || !data || !data.user) return [];
     const sortedUsers = orderBy(data.user, 'highscore', 'desc');
     return sortedUsers.slice(0, 5);
-  }, [data]);
-
+  }, [data, loading]);
 
   return (
     <div className="flex flex-col h-4/5">

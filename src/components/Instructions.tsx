@@ -5,10 +5,9 @@ interface InstructionsProps {
     mainText: string,
     controlKeys: string[],
     controlKeyText?: string[],
-    isLargeScreen?: boolean
 }
 const Instructions: React.FC<InstructionsProps> = (props) => {
-    const { mainText, controlKeys, controlKeyText, isLargeScreen } = props;
+    const { mainText, controlKeys, controlKeyText } = props;
 
     // don't overuse useMemo/useCallback. in this case it's more efficient to not use useMemo
     const controlList = () => {
@@ -44,7 +43,6 @@ const Instructions: React.FC<InstructionsProps> = (props) => {
                 className="z-30 flex flex-col items-center justify-around w-full overflow-auto bg-white shadow-xl"
                 animate={INSTRUCTIONS_ANIMATION}
             >
-                {/* <h1 className={`w-4/5 text-center ${isLargeScreen ? 'text-[3vw]' : 'text-[2vw]'}`}> {mainText} </h1> */}
                 <h1 className='w-4/5 text-center min-font-size'> {mainText} </h1>
                 <div className="flex flex-col items-center w-full overflow-y-hidden">
                     <div className="flex min-font-size">

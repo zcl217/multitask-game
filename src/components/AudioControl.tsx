@@ -1,7 +1,7 @@
 
 import { ReactComponent as SpeakerIcon } from './../assets/speakerIcon.svg';
 import { ReactComponent as MuteIcon } from './../assets/muteIcon.svg';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GAME_BGM, HOME_SCREEN_BGM } from '../audio/sounds';
 
 interface AudioControlProps {
@@ -19,7 +19,7 @@ const AudioControl: React.FC<AudioControlProps> = (props) => {
         } else {
             isInGame ? GAME_BGM.pause() : HOME_SCREEN_BGM.pause();
         }
-    }, [isAudioOn]);
+    }, [isAudioOn, isInGame]);
     
     return (
         <div className="absolute z-50 cursor-pointer top-[1%] right-[1%]" >

@@ -20,7 +20,7 @@ const Score: React.FC<ScoreProps> = (props) => {
             clearInterval(scoreInterval);
             handleSetScore(score);
         }
-    }, [isAnotherGameOver, scoreInterval]);
+    }, [isAnotherGameOver, scoreInterval, handleSetScore, score]);
 
     return (
         <div className="absolute z-10 text-[5vw] w-full text-center">

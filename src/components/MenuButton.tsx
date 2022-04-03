@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BUTTON_BORDER_VARIANT, BUTTON_CONTENT_VARIANT, MENU_BUTTON_OPACITY_VARIANT, MODAL_CONTENT_VARIANT } from "../constants/animations/MenuAnimations";
+import { BUTTON_BORDER_VARIANT, BUTTON_CONTENT_VARIANT, MODAL_CONTENT_VARIANT } from "../constants/animations/MenuAnimations";
 
 interface MenuButtonProps {
     isButtonOpen: boolean,

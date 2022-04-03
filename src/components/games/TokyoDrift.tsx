@@ -128,6 +128,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
     // if another game ends
     useEffect(() => {
         if (isAnotherGameOver) handleCurrentGameEnd();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAnotherGameOver]);
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -192,6 +193,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
             setMeteorSpeed(speed => speed - 500);
         }
         setSpawnedMeteorCount(count => count + 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [meteorContainer]);
 
     const meteorLanes = (
@@ -234,6 +236,7 @@ const TokyoDrift: React.FC<TokyoDriftProps> = (props) => {
             clearInterval(meteorSpawner);
             clearInterval(collisionChecker);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getStoppedSpaceshipPositioning = (left: number, top: number) => {

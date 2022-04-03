@@ -118,9 +118,6 @@ const generateGrid = () => {
 
 const INITIAL_PATTERN_COUNT = 2;
 
-// TODO: two consecutive press not working bug might've been because of grid length not being able to be accessed
-// in the useKey callback but not completely sure
-// TODO: timer is not clearing properly on another game end... and I can still move?????
 const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const { endAllGames, isAnotherGameOver, isSmallScreen, displayNextGame } = props;
     const [displayCheckmark, setDisplayCheckmark] = useState(false);
@@ -130,8 +127,6 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
     const [yPos, setYPos] = useState(0);
     const [patternList, setPatternList] = useState([] as Pattern[]);
     const [shouldDisplayStartText, setShouldDisplayStartText] = useState(false);
-    const [shouldDisplayPlayer, setShouldDisplayPlayer] = useState(false);
-    const [isPlayerOnWrongCell, setIsPlayerOnWrongCell] = useState(false);
     const [shouldDisplayX, setShouldDisplayX] = useState(false);
     const [isGridExpanding, setIsGridExpanding] = useState(false);
     // initialize a 3 by 3 matrix
@@ -218,7 +213,6 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
                     };
                     setTimeout(() => {
                         if (isCurrentGameOverRef.current) return;
-                        setShouldDisplayPlayer(true);
                         canPlayerMoveRef.current = true;
                         gridDispatcher({ type: GRID_ACTION_TYPES.RESET_ANIMATION_PROPERTIES });
                         // TODO: bug here if we change this to another value other than 1000. not sure why
@@ -233,7 +227,7 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             startPattern();
         }, 4000);
         return () => clearTimeout(timeoutId);
-    }, []);
+    }, [startPattern]);
 
     const handleGameOver = useCallback(() => {
         isCurrentGameOverRef.current = true;
@@ -252,7 +246,6 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             gridDispatcher({ type: GRID_ACTION_TYPES.RESET_ANIMATION_PROPERTIES });
             setDisplayCheckmark(false);
             setIsPlayerMoving(false);
-            setShouldDisplayPlayer(false);
             currentPatternIterationRef.current++;
             if (currentPatternIterationRef.current % 5 === 0) {
                 setIsGridExpanding(true);
@@ -284,7 +277,6 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
         // if the player moved to the wrong cell, end the game
         if (xPos !== currentPattern.x || yPos !== currentPattern.y) {
             handleGameOver();
-            setIsPlayerOnWrongCell(true);
             return;
         }
         if (isFinalPattern) {
@@ -371,7 +363,6 @@ const PatternCopier: React.FC<PatternCopierProps> = (props) => {
             <Instructions
                 mainText={"Follow the green pattern!"}
                 controlKeys={['←', '↑', '→', '↓']}
-                isLargeScreen={true}
             />
             {
                 displayCheckmark &&

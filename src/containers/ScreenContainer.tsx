@@ -22,7 +22,7 @@ const ScreenContainer: React.FC = () => {
     const [isGameScreenShifting, setIsGameScreenShifting] = useState(false);
     const [username, setUsername] = useState('anonymous');
     const [highscore, setHighscore] = useState(0);
-    const [fetchCurrentUser, { loading, data: userData, refetch }] = useLazyQuery(FETCH_CURRENT_USER, {});
+    const [fetchCurrentUser, { data: userData }] = useLazyQuery(FETCH_CURRENT_USER, {});
     const [updateUserScore] = useMutation(UPDATE_USER_SCORE_MUTATION, {});
     const [insertNewUser] = useMutation(INSERT_NEW_USER_MUTATION, {});
 
@@ -33,7 +33,7 @@ const ScreenContainer: React.FC = () => {
                 userId: user.sub
             }
         });
-    }, [user]);
+    }, [user, fetchCurrentUser]);
     useEffect(() => {
         if (userData?.user === undefined || !user?.sub) return;
         if (userData.user.length > 0) {
@@ -48,7 +48,7 @@ const ScreenContainer: React.FC = () => {
                 }
             });
         }
-    }, [userData, user]);
+    }, [userData, user, insertNewUser]);
 
     const handleStart = () => {
         setIsInGame(true);

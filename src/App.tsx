@@ -25,9 +25,8 @@ const createDefaultClient = () => {
 };
 
 const App: React.FC = () => {
-  const { user, isAuthenticated } = useAuth0();
-  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
-  const [isInGame, setIsInGame] = useState(false);
+  const { isAuthenticated } = useAuth0();
+  const { getIdTokenClaims } = useAuth0();
   const [client, setClient] = useState(createDefaultClient());
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const App: React.FC = () => {
       const tokenClaims = await getIdTokenClaims();
       setClient(createApolloClient(tokenClaims?.__raw || ''));
     })();
-  }, [getAccessTokenSilently, isAuthenticated]);
+  }, [getIdTokenClaims, isAuthenticated]);
 
   return (
     <ApolloProvider client={client}>

@@ -1,15 +1,12 @@
 
 import { ReactComponent as GrandStaff } from '../../assets/staff.svg';
-import { ReactComponent as Piano } from '../../assets/piano.svg';
-import { ReactComponent as QuarterNote } from '../../assets/quarterNote.svg';
 import { ReactComponent as WholeNote } from '../../assets/wholeNote.svg';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useKey } from 'react-use';
-import { CHECKMARK_ANIMATION_PROPERTIES, getNoteAnimationProperties, HITZONE_ANIMATION_PROPERTIES, NOTE_FADE_VARIANT, NOTE_SCALE_ANIMATION_PROPERTIES } from '../../constants/animations/PianoPlayerAnimations';
+import { CHECKMARK_ANIMATION_PROPERTIES, getNoteAnimationProperties, HITZONE_ANIMATION_PROPERTIES, NOTE_FADE_VARIANT } from '../../constants/animations/PianoPlayerAnimations';
 import { checkIfIntersecting, handleGameOverAudio } from '../../helpers/helpers';
 import { times } from 'lodash';
-import { ReactComponent as XMarkSVG } from '../../assets/xMark.svg';
 import { ReactComponent as Checkmark } from '../../assets/checkmark.svg';
 import XMark from '../XMark';
 import { GAME_IDS } from '../../constants/common';
@@ -21,7 +18,6 @@ interface PianoPlayerProps {
     isSmallScreen: boolean
 }
 
-// TODO: huge bug where successfully played notes still end the game.
 const PianoPlayer: React.FC<PianoPlayerProps> = (props) => {
     const { endAllGames, isAnotherGameOver, isSmallScreen } = props;
     const [noteDelay, setNoteDelay] = useState(5500);
