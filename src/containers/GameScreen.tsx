@@ -18,7 +18,7 @@ interface GameScreenProps {
 const GameScreen: React.FC<GameScreenProps> = (props) => {
     const { isInGame, highscore, hideGameScreen, shiftGameScreens, updateHighscore } = props;
 
-    const [gamesDisplayed, setGamesDisplayed] = useState(4);
+    const [gamesDisplayed, setGamesDisplayed] = useState(1);
     const [isAnotherGameOver, setIsAnotherGameOver] = useState(false);
     const [scoreInterval, setScoreInterval] = useState(0);
     // use state if we decide to always display the score
