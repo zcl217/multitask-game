@@ -20,20 +20,20 @@ const AudioControl: React.FC<AudioControlProps> = (props) => {
             isInGame ? GAME_BGM.pause() : HOME_SCREEN_BGM.pause();
         }
     }, [isAudioOn, isInGame]);
-    
-    return (
-        <div className="absolute z-50 cursor-pointer top-[1%] right-[1%]" >
-            {isAudioOn ?
-                <SpeakerIcon
-                    className="w-10 h-10"
-                    onClick={() => setIsAudioOn(false)}
-                /> :
-                <MuteIcon
-                    className="w-10 h-10"
-                    onClick={() => setIsAudioOn(true)}
-                />}
-        </div>
-    );
+    return null;
+    // return (
+    //     <div className="absolute z-50 cursor-pointer top-[1%] right-[1%]" >
+    //         {isAudioOn ?
+    //             <SpeakerIcon
+    //                 className="w-10 h-10"
+    //                 onClick={() => setIsAudioOn(false)}
+    //             /> :
+    //             <MuteIcon
+    //                 className="w-10 h-10"
+    //                 onClick={() => setIsAudioOn(true)}
+    //             />}
+    //     </div>
+    // );
 }
 
 export default AudioControl;
